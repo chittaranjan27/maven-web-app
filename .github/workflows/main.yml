@@ -1,0 +1,52 @@
+name: Maven Build and Goals Output
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java (using JDK 11; adjust if needed)
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      # Step 3: Run Maven Goals
+
+      - name: Maven Clean
+        run: mvn clean
+
+      - name: Maven Validate
+        run: mvn validate
+
+      - name: Maven Compile
+        run: mvn compile
+
+      - name: Maven Test
+        run: mvn test
+
+      - name: Maven Package
+        run: mvn package
+
+      - name: Maven Verify
+        run: mvn verify
+
+      - name: Maven Install
+        run: mvn install
+
+      - name: Maven Site
+        run: mvn site
+
+      - name: Maven Deploy
+        run: mvn deploy
