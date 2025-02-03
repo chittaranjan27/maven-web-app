@@ -47,9 +47,6 @@ jobs:
     - name: Maven Site
       run: mvn site
 
-    - name: Maven Deploy
-      run: mvn deploy
-
     # Optional: Upload dependency graph to GitHub (for better Dependabot insights)
     - name: Update Dependency Graph
       uses: advanced-security/maven-dependency-submission-action@v4
