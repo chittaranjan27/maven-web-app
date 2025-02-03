@@ -1,0 +1,55 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    # Run all 9 Maven goals one by one
+    - name: Maven Clean
+      run: mvn clean
+
+    - name: Maven Validate
+      run: mvn validate
+
+    - name: Maven Compile
+      run: mvn compile
+
+    - name: Maven Test
+      run: mvn test
+
+    - name: Maven Package
+      run: mvn package
+
+    - name: Maven Verify
+      run: mvn verify
+
+    - name: Maven Install
+      run: mvn install
+
+    - name: Maven Site
+      run: mvn site
+
+    - name: Maven Deploy
+      run: mvn deploy
+
+    # Optional: Upload dependency graph to GitHub (for better Dependabot insights)
+    - name: Update Dependency Graph
+      uses: advanced-security/maven-dependency-submission-action@v4
